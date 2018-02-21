@@ -1,5 +1,8 @@
 module Learning
   class TopicsController < AuthenticatedController
-    expose(:topics) { Topic.main.first&.subtopics || [] }
+    expose(:course) { Topic.main.first }
+    expose(:unfinished_topic) { course.subtopics.detect { |topic| !topic.finished_by?(current_user) } }
+
+    def index; end
   end
 end

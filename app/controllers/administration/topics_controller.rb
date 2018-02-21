@@ -7,6 +7,8 @@ module Administration
 
     def index; end
 
+    def show; end
+
     def create
       if topic.update(topic_params)
         flash[:success] = t('.success')

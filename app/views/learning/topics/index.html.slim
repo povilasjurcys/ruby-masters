@@ -1,3 +1,6 @@
-h1 = t('learning.course')
-ul.list-group = render partial: 'learning/topics/topic', collection: topics
+- if unfinished_topic
+  h1 = (unfinished_topic.ancestor_topics.map(&:title) + [unfinished_topic.title]).join(' » ')
+  ul.list-group = render partial: 'learning/topics/topic', collection: unfinished_topic.subtopics, as: :topic
+- else
+  h1 = t('.course_is_finished')
 

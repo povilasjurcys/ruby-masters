@@ -15,5 +15,13 @@ module Learning
       ancestors << ancestors.last.parent_topic while ancestors.last&.parent_topic
       ancestors
     end
+
+    def finished_by?(user)
+      if subtopics.any?
+        subtopics.all? { |topic| topic.finished_by?(user) }
+      else
+        accomplishments.where(user_id: user.id).exists?
+      end
+    end
   end
 end

@@ -1,8 +1,9 @@
 li.list-group-item
   .row
     .col-11
-      = (['» '] * topic.ancestor_topics.count).join
-      = topic.title
+      - topic_title = (['» '] * topic.ancestor_topics.count).join + topic.title
+      = link_to topic_title, administration_topic_path(topic)
+
     .col-1
       .btn-group.topic_actions
         button.btn.btn-sm.btn-success.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

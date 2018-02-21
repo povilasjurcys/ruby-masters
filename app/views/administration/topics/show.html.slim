@@ -1,0 +1,6 @@
+h1= (topic.ancestor_topics.map(&:title) + [topic.title]).join(' » ')
+
+ul.list-group
+  = render partial: 'administration/topics/topic', collection: topic.subtopics, as: :topic
+
+= link_to t('.new_topic'), new_administration_topic_path(parent_topic_id: topic.id)

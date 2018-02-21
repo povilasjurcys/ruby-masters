@@ -11,15 +11,13 @@ class AuthenticatedController < ApplicationController
   protected
 
   def current_user
-    return @current_user if defined?(@current_user)
-
-    @current_user = User.find_by(id: session[:current_user_id])
+    @current_user ||= User.find_by(id: session[:current_user_id])
   end
 
   private
 
   def require_user
-    raise NotAuthenticatedUserError unless current_user.present?
+    raise NotAuthenticatedUserError if current_user.nil?
   end
 
   def redirect_to_login_page
