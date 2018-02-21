@@ -32,6 +32,10 @@ gem 'omniauth-github'
 
 gem 'acts_as_list'
 
+# monitoring
+
+gem 'sentry-raven'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
