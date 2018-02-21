@@ -1,0 +1,6 @@
+h1= t('.title')
+
+ul.list-group
+  = render partial: 'administration/topics/topic', collection: topics
+
+= link_to t('.new_topic'), new_administration_topic_path

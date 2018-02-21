@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :email
       t.string :image_url
       t.string :github_uid, null: false
+      t.string :type, null: false
 
       t.timestamps
     end

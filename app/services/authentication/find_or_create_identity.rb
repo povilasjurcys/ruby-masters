@@ -9,15 +9,15 @@ module Authentication
       identity = Identity.find_or_initialize_by(auth_hash.slice(:provider, :uid))
       return identity if identity.persisted?
 
-      identity.tap { |it| it.update(user: find_or_create_user_by_auth_hash) }
+      identity.tap { |it| it.update(user: find_or_create_student_by_auth_hash) }
     end
 
     private
 
     attr_reader :auth_hash
 
-    def find_or_create_user_by_auth_hash
-      User.find_or_create_by!(github_uid: github_uid) do |user|
+    def find_or_create_student_by_auth_hash
+      Student.find_or_create_by!(github_uid: github_uid) do |user|
         info = auth_hash[:info]
         user.email = info[:email]
         user.first_name = info[:name].to_s.split(' ').first

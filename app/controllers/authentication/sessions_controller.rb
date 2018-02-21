@@ -5,7 +5,6 @@ module Authentication
     end
 
     def create
-      binding.pry
       identity = FindOrCreateIdentity.new(auth_hash).call
       session[:current_user_id] = identity.user.id
 

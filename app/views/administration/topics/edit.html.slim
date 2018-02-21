@@ -1,0 +1,9 @@
+h1
+  - if parent_topic.present?
+    = t('.subtopic.edit', parent_topic: parent_topic.name)
+  - else
+    = t('.topic.edit')
+
+= simple_form_for topic, url: administration_topics_path do |f|
+  = f.input :title
+  = f.submit

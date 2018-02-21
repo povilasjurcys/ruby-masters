@@ -30,4 +30,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  administration:
+    topics:
+      index:
+        title: Topics
+      topic:
+        action: 'Action'
+        destroy: 'Delete'
+        are_you_sure: 'Are you sure?'
+      new:
+        topic:
+          new: 'New topic'
+
+

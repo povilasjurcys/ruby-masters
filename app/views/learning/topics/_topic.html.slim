@@ -1,0 +1,16 @@
+li.list-group-item
+  .row
+    .col-11
+      = (['» '] * (topic.ancestor_topics.count - 1)).join
+      = topic.title
+    .col-1
+      .btn-group.topic_actions
+        button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          = t('.status')
+        .dropdown-menu
+          = link_to t('.skipped'), edit_administration_topic_path(topic), class: 'dropdown-item'
+          = link_to t('.done'), administration_topic_path(topic), method: :delete, data: { confirm: t('.are_you_sure') }, class: 'dropdown-item'
+          = link_to t('.failed'), administration_topic_path(topic), method: :delete, data: { confirm: t('.are_you_sure') }, class: 'dropdown-item'
+
+- if topic.subtopics.any?
+  = render partial: 'learning/topics/topic', collection: topic.subtopics, as: :topic

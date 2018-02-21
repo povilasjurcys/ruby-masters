@@ -19,6 +19,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.2'
 
 gem 'pg' # postgres DB
+
+gem 'decent_exposure' # Simplified controller helpers
 gem 'simple_form'
 gem 'slim' # Templating
 

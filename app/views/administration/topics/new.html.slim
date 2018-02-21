@@ -1,0 +1,11 @@
+h1
+  - if parent_topic.present?
+    = t('.subtopic.new', parent_topic: parent_topic.title)
+  - else
+    = t('.topic.new')
+
+
+= simple_form_for topic, url: administration_topics_path do |f|
+  = f.input :title
+  = f.input :parent_topic_id, as: :hidden, input_html: { value: f.object.parent_topic_id || parent_topic_id }
+  = f.submit
