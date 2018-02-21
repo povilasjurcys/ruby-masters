@@ -5,7 +5,12 @@ module Learning
 
     def create
       topic.accomplishments.create!(accomplishment_params)
-      redirect_back(fallback_location: root_url)
+
+      if topic.parent_topic.finished_by?(current_user)
+        redirect_to learning_topics_path
+      else
+        redirect_back(fallback_location: root_url)
+      end
     end
 
     def update
