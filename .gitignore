@@ -28,3 +28,4 @@ spec/examples.txt
 yarn-debug.log*
 .yarn-integrity
 .history/
+/.env

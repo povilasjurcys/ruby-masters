@@ -34,7 +34,7 @@ gem 'acts_as_list'
 
 # monitoring
 
-gem 'sentry-raven'
+gem 'sentry-raven' # bugs reporter
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -53,6 +53,8 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'pry-byebug'
+
+  gem 'dotenv-rails' # env variables in one place
 end
 
 group :development do

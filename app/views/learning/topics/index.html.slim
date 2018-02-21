@@ -1,5 +1,8 @@
 - if unfinished_topic
-  h1 = (unfinished_topic.ancestor_topics.map(&:title) + [unfinished_topic.title]).join(' » ')
+  - unfinished_topic.ancestor_topics.reverse.each do |ancestor_topic|
+    = link_to ancestor_topic.title, learning_topic_path(ancestor_topic)
+    = ' » ' if unfinished_topic.ancestor_topics.first != ancestor_topic
+  h1 = unfinished_topic.title
   ul.list-group = render partial: 'learning/topics/topic', collection: unfinished_topic.subtopics, as: :topic
 - else
   h1 = t('.course_is_finished')

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :learning do
-    resources :topics, only: :index do
+    resources :topics, only: %i[index show] do
       resource :accomplishment
     end
   end

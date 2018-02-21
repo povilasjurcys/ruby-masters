@@ -1,24 +1,21 @@
 li.list-group-item: .row: .col-12
-  = (['» '] * (topic.ancestor_topics.count - 1)).join
+  = (['» '] * nesting_level).join
   = topic.title
-  .float-right: .btn-group
-    - if topic.accomplishments.where(user_id: current_user.id).exists?
-      - accompishment = topic.accomplishments.find_by(user_id: current_user.id)
-
-      button.btn.btn-sm.dropdown-toggle[
-        class=(accompishment.skipped? ? 'btn-info' : 'btn-success')
-        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-      ]
-        = t(".#{accompishment.status}")
-      .dropdown-menu
-        = link_to t('.skipped'), learning_topic_accomplishment_path(topic, status: 'skipped'), class: 'dropdown-item', method: :put
-        = link_to t('.done'), learning_topic_accomplishment_path(topic, status: 'done'), class: 'dropdown-item', method: :put
-    - else
-      button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        = t('.status')
-      .dropdown-menu
-        = link_to t('.skipped'), learning_topic_accomplishment_path(topic, status: 'skipped'), class: 'dropdown-item', method: :post
-        = link_to t('.done'), learning_topic_accomplishment_path(topic, status: 'done'), class: 'dropdown-item', method: :post
+  - if topic.subtopics.empty?
+    .float-right: .btn-group
+      - if topic.finished?
+        button.btn.btn-sm[
+          class=(topic.skipped? ? 'btn-info' : 'btn-success')
+          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        ]
+          = t(".#{topic.status}")
+      - else
+        button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          = t('.status')
+        .dropdown-menu
+          = link_to t('.skipped'), learning_topic_accomplishment_path(topic.id, status: 'skipped'), class: 'dropdown-item', method: :post
+          = link_to t('.done'), learning_topic_accomplishment_path(topic.id, status: 'done'), class: 'dropdown-item', method: :post
 
 - if topic.subtopics.any?
-  = render partial: 'learning/topics/topic', collection: topic.subtopics, as: :topic
+  = render partial: 'learning/topics/topic', collection: topic.subtopics, as: :topic,
+    locals: { nesting_level: nesting_level + 1 }

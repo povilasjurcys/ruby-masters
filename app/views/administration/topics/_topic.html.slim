@@ -3,6 +3,13 @@ li.list-group-item
     .col-11
       - topic_title = (['» '] * topic.ancestor_topics.count).join + topic.title
       = link_to topic_title, administration_topic_path(topic)
+      - topic.accomplishments.group_by(&:status).each do |status, accomplishments|
+        '
+        - if status == 'skipped'
+          span.badge.badge-info = accomplishments.count
+        - else
+          span.badge.badge-success = accomplishments.count
+
 
     .col-1
       .btn-group.topic_actions
