@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
 
   namespace :learning do
-    resources :topics, only: %i[index]
+    resources :topics, only: :index do
+      resource :accomplishment
+    end
   end
 
   get 'auth/:provider/callback' => 'authentication/sessions#create'

@@ -10,12 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220072604) do
+ActiveRecord::Schema.define(version: 20180221061615) do
 
   create_table "authentication_identities", force: :cascade do |t|
     t.string "provider"
     t.integer "user_id"
     t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "learning_accomplishments", force: :cascade do |t|
+    t.integer "status"
+    t.integer "user_id"
+    t.integer "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "learning_topics", force: :cascade do |t|
+    t.string "title"
+    t.integer "course_id"
+    t.integer "parent_topic_id"
+    t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180220072604) do
     t.string "email"
     t.string "image_url"
     t.string "github_uid", null: false
+    t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["github_uid"], name: "index_users_on_github_uid", unique: true
