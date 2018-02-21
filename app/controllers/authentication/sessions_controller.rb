@@ -8,7 +8,7 @@ module Authentication
       identity = FindOrCreateIdentity.new(auth_hash).call
       session[:current_user_id] = identity.user.id
 
-      redirect_back(fallback_location: root_url)
+      redirect_to root_url
     end
 
     private
