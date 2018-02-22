@@ -11,6 +11,12 @@ module Authentication
       redirect_to root_url
     end
 
+    def destroy
+      session.delete(:current_user_id)
+      @current_user = nil
+      redirect_to root_url
+    end
+
     private
 
     def user_by_auth_hash

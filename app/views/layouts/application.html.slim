@@ -18,6 +18,9 @@ html
     header.navbar.navbar-light.bg-light
       = link_to 'Ruby Masters', '/', class: 'navbar-brand mr-0 mr-md-2'
       .navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
+        = link_to authentication_session_path, method: :delete do
+          = fa_icon('sign-out', class: 'text-danger')
+        '
         = current_user&.full_name
     .container
       main.col-12.bd-content.py-md-3.pl-md-5

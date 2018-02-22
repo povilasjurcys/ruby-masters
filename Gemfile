@@ -11,11 +11,11 @@ gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 
+# assets
+gem 'font-awesome-rails'
+gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
+gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'webpacker', '~> 3.2'
 
 gem 'pg' # postgres DB
