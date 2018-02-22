@@ -1,11 +1,10 @@
-- if topic
-  - topic.ancestor_topics.reverse.each do |ancestor_topic|
-    = ' » '
-    = link_to ancestor_topic.title, learning_topic_path(ancestor_topic)
-  h1 = topic.title
-  ul.list-group
-    = render partial: 'learning/topics/topic', collection: topic.subtopics, as: :topic,
-      locals: { nesting_level: 1 }
-- else
-  h1 = t('.course_is_finished')
+- if user_topic.ancestor_topics.any?
+  nav: ol.breadcrumb
+    - user_topic.ancestor_topics.reverse.each do |ancestor_topic|
+      li.breadcrumb-item= link_to ancestor_topic.title, learning_topic_path(ancestor_topic)
+    li.breadcrumb-item.active= user_topic.title
+h1 = user_topic.title
+ul.list-group
+  = render partial: 'learning/topics/topic', collection: user_topic.subtopics, as: :topic,
+    locals: { nesting_level: 1 }
 

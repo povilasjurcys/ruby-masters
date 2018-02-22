@@ -1,7 +1,7 @@
 module Learning
   class TopicsController < AuthenticatedController
     expose(:course) { Topic.main.first }
-    expose(:topic) { UserTopic.new(Topic.find(params[:id]), current_user) }
+    expose(:user_topic) { UserTopic.new(Topic.find(params[:id]), current_user) }
 
     def index
       return if course.nil? || course.finished_by?(current_user)
