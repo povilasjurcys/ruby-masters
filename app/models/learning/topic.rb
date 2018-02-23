@@ -8,6 +8,7 @@ module Learning
 
     acts_as_list scope: [:parent_topic_id]
 
+    default_scope -> { order(:position) }
     scope :main, -> { where(parent_topic_id: nil) }
 
     def ancestor_topics
