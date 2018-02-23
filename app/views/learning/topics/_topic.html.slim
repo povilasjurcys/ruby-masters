@@ -4,11 +4,15 @@ li.list-group-item: .row: .col-12
   - if topic.subtopics.empty?
     .float-right: .btn-group
       - if topic.finished?
-        button.btn.btn-sm[
+        button.btn.btn-sm.dropdown-toggle[
           class=(topic.skipped? ? 'btn-info' : 'btn-success')
           type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         ]
           = t(".#{topic.status}")
+        .dropdown-menu
+          = link_to t('.skipped'), learning_topic_accomplishment_path(topic.id, status: 'skipped'), class: 'dropdown-item', method: :put
+          = link_to t('.done'), learning_topic_accomplishment_path(topic.id, status: 'done'), class: 'dropdown-item', method: :put
+
       - else
         button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           = t('.status')
