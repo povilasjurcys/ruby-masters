@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221061615) do
+ActiveRecord::Schema.define(version: 20180223043825) do
 
   create_table "authentication_identities", force: :cascade do |t|
     t.string "provider"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180221061615) do
     t.string "type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "github_url"
     t.index ["github_uid"], name: "index_users_on_github_uid", unique: true
   end
 

@@ -19,9 +19,6 @@ module Authentication
 
     private
 
-    def user_by_auth_hash
-    end
-
     def auth_hash
       request.env['omniauth.auth'].to_h.deep_symbolize_keys
     end

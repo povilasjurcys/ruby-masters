@@ -23,6 +23,7 @@ module Authentication
         user.first_name = info[:name].to_s.split(' ').first
         user.last_name = info[:name].to_s.split(' ').last
         user.image_url = info[:image]
+        user.github_url = info.dig(:urls, :GitHub)
       end
     end
 
