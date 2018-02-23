@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :session, only: %i[new destroy]
   end
 
-  namespace :administration do
+  namespace :admin do
     resources :topics
     resources :students, only: :index
   end

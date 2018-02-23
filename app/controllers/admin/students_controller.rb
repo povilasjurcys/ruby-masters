@@ -1,4 +1,4 @@
-module Administration
+module Admin
   class StudentsController < AdministrationController
     expose(:students) { Student.all }
 

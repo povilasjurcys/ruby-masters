@@ -2,7 +2,7 @@ li.list-group-item
   .row
     .col-11
       - topic_title = (['» '] * topic.ancestor_topics.count).join + topic.title
-      = link_to topic_title, administration_topic_path(topic)
+      = link_to topic_title, admin_topic_path(topic)
       - topic.accomplishments.group_by(&:status).each do |status, accomplishments|
         - accomplishments_title = accomplishments.map(&:user).map(&:full_name).join(', ')
         '
@@ -19,13 +19,13 @@ li.list-group-item
         button.btn.btn-sm.btn-success.dropdown-toggle type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           = t('.action')
         .dropdown-menu
-          = link_to t('.edit'), edit_administration_topic_path(topic), class: 'dropdown-item'
-          = link_to t('.destroy'), administration_topic_path(topic), method: :delete, data: { confirm: t('.are_you_sure') }, class: 'dropdown-item'
+          = link_to t('.edit'), edit_admin_topic_path(topic), class: 'dropdown-item'
+          = link_to t('.destroy'), admin_topic_path(topic), method: :delete, data: { confirm: t('.are_you_sure') }, class: 'dropdown-item'
           .dropdown-divider
-          = link_to t('.new_subtopic'), new_administration_topic_path(parent_topic_id: topic.id), class: 'dropdown-item'
+          = link_to t('.new_subtopic'), new_admin_topic_path(parent_topic_id: topic.id), class: 'dropdown-item'
 
 - if topic.subtopics.any?
-  = render partial: 'administration/topics/topic', collection: topic.subtopics, as: :topic
+  = render partial: 'admin/topics/topic', collection: topic.subtopics, as: :topic
 
 
 

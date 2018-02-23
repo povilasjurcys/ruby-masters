@@ -1,4 +1,4 @@
-module Administration
+module Admin
   class TopicsController < AdministrationController
     expose(:topics) { Learning::Topic.main }
     expose(:topic, model: 'Learning::Topic')

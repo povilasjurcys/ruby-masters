@@ -1,4 +1,4 @@
-module Administration
+module Admin
   class AdministrationController < AuthenticatedController
     protected
 
