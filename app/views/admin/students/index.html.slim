@@ -1,3 +1,14 @@
+h1= t('.title')
+
+.dropdown
+  button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown"
+    = users_group&.title || t('.groups')
+  .dropdown-menu
+    = link_to t('.all_groups'), admin_students_path, class: 'dropdown-item'
+    - user_groups.each do |users_group|
+      = link_to users_group.title, admin_students_path(users_group_id: users_group.id), \
+        class: 'dropdown-item'
+br
 table.table.table-striped.table-hover
   thead: tr
     th scope="col"
@@ -6,6 +17,8 @@ table.table.table-striped.table-hover
       = t('.github_url')
     th scope="col"
       = t('.last_accomplishment')
+    th scope="col"
+
   tbody
     - students.each do |student|
       tr
@@ -15,3 +28,9 @@ table.table.table-striped.table-hover
           - last_accomplishment = student.accomplishments.last
           - if last_accomplishment
             | #{last_accomplishment.topic.title} (#{l(last_accomplishment.created_at.to_date, format: :short)})
+        td
+          = link_to edit_admin_student_path(student), class: 'text-warning' do
+            = fa_icon('edit')
+          = link_to admin_student_path(student), method: :delete, \
+            class: 'text-danger', data: { confirm: t('.are_you_sure') } do
+            = fa_icon('trash-o')

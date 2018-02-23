@@ -7,12 +7,11 @@ li.list-group-item
         - accomplishments_title = accomplishments.map(&:user).map(&:full_name).join(', ')
         '
         - if status == 'skipped'
-          span.badge.badge-info title=accomplishments_title
+          span.badge.badge-info data-toggle="tooltip" title=accomplishments_title
             = accomplishments.count
         - else
-          span.badge.badge-success title=accomplishments_title
+          span.badge.badge-success data-toggle="tooltip" title=accomplishments_title
             = accomplishments.count
-
 
     .col-1
       .btn-group.topic_actions

@@ -8,3 +8,8 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import 'bootstrap/dist/js/bootstrap';
+import $ from 'jquery'
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

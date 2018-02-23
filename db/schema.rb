@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223043825) do
+ActiveRecord::Schema.define(version: 20180223202108) do
 
   create_table "authentication_identities", force: :cascade do |t|
     t.string "provider"
@@ -33,6 +33,21 @@ ActiveRecord::Schema.define(version: 20180223043825) do
     t.integer "course_id"
     t.integer "parent_topic_id"
     t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "learning_users_group_users", force: :cascade do |t|
+    t.integer "users_group_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_learning_users_group_users_on_user_id"
+    t.index ["users_group_id"], name: "index_learning_users_group_users_on_users_group_id"
+  end
+
+  create_table "learning_users_groups", force: :cascade do |t|
+    t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
