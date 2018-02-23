@@ -34,10 +34,11 @@ html
                 = link_to t('.students'), administration_students_path, class: 'nav-link'
 
       .navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
-        = link_to authentication_session_path, method: :delete do
-          = fa_icon('sign-out', class: 'text-danger')
-        '
-        = current_user&.full_name
+        .col-1
+          = link_to authentication_session_path, method: :delete do
+            = fa_icon('refresh')
+        .col-11
+          = current_user&.full_name
     .container
       main.col-12.bd-content.py-md-3.pl-md-5
         = yield
