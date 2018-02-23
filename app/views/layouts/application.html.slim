@@ -17,6 +17,20 @@ html
 
     header.navbar.navbar-light.bg-light
       = link_to 'Ruby Masters', '/', class: 'navbar-brand mr-0 mr-md-2'
+      .navbar.navbar-expand-lg
+        button.navbar-toggler[
+          type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+        ]
+          span.navbar-toggler-icon
+
+        #main-menu.collapse.navbar-collapse
+          ul.navbar-nav
+            li.nav-item.active
+              = link_to t('.home'), root_path, class: 'nav-link'
+            - if current_user.is_a?(AdminUser)
+              li.nav-item
+                = link_to t('.topics_management'), administration_topics_path, class: 'nav-link'
+
       .navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
         = link_to authentication_session_path, method: :delete do
           = fa_icon('sign-out', class: 'text-danger')
