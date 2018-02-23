@@ -4,7 +4,12 @@ module Admin
     expose(:student, scope: -> { students })
     expose(:users_group) { Learning::UsersGroup.find_by(id: params[:users_group_id]) }
     expose(:user_groups) { Learning::UsersGroup.all }
-    expose(:leaf_topics) { Learning::Topic.where.not(id: Learning::Topic.pluck(:parent_topic_id).uniq) }
+    expose(:finished_topics) do
+      finished_topic_ids = Learning::Accomplishment.where(user_id: students)
+      Learning::Topic
+        .where(id: finished_topic_ids)
+        .order(%i[parent_topic_id position])
+    end
 
     def index; end
     def edit; end
