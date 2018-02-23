@@ -16,7 +16,7 @@ table.table.table-striped.table-hover
     th scope="col"
       = t('.github_url')
     th scope="col"
-      = t('.last_accomplishment')
+      = t('.progress')
     th scope="col"
 
   tbody
@@ -25,6 +25,19 @@ table.table.table-striped.table-hover
         td = student.full_name
         td = link_to student.github_url, student.github_url
         td
+          - accomplishment_percent = 100.0 / leaf_topics.count
+          .progress
+            - leaf_topics.each do |topic|
+              - progress_title = topic.title
+              - topic_accomplishment = student.accomplishments.detect { |it| it.topic == topic }
+              - progress_title << " | #{l(topic_accomplishment.updated_at, format: :short)}" if topic_accomplishment
+              .progress-bar[
+                role="progressbar"
+                style="width: #{accomplishment_percent}%"
+                title=progress_title
+                data-toggle="tooltip"
+                class=(topic_accomplishment ? (topic_accomplishment.done? ? 'bg-success' : 'bg-info') : nil)
+              ]
           - last_accomplishment = student.accomplishments.last
           - if last_accomplishment
             | #{last_accomplishment.topic.title} (#{l(last_accomplishment.created_at.to_date, format: :short)})

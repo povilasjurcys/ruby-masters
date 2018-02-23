@@ -4,6 +4,7 @@ module Admin
     expose(:student, scope: -> { students })
     expose(:users_group) { Learning::UsersGroup.find_by(id: params[:users_group_id]) }
     expose(:user_groups) { Learning::UsersGroup.all }
+    expose(:leaf_topics) { Learning::Topic.where.not(id: Learning::Topic.pluck(:parent_topic_id).uniq) }
 
     def index; end
     def edit; end
