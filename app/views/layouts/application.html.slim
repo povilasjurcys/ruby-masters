@@ -30,6 +30,8 @@ html
             - if current_user.is_a?(AdminUser)
               li.nav-item
                 = link_to t('.topics_management'), administration_topics_path, class: 'nav-link'
+              li.nav-item
+                = link_to t('.students'), administration_students_path, class: 'nav-link'
 
       .navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
         = link_to authentication_session_path, method: :delete do

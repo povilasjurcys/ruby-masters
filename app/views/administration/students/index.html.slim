@@ -1,0 +1,17 @@
+table.table.table-striped.table-hover
+  thead: tr
+    th scope="col"
+      = t('.full_name')
+    th scope="col"
+      = t('.github_url')
+    th scope="col"
+      = t('.last_accomplishment')
+  tbody
+    - students.each do |student|
+      tr
+        td = student.full_name
+        td = link_to student.github_url, student.github_url
+        td
+          - last_accomplishment = student.accomplishments.last
+          - if last_accomplishment
+            | #{last_accomplishment.topic.title} (#{l(last_accomplishment.created_at.to_date, format: :short)})

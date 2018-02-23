@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :administration do
     resources :topics
+    resources :students, only: :index
   end
 
   namespace :learning do
