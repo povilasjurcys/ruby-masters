@@ -1,14 +1,8 @@
 h1= t('.title')
 
-.dropdown
-  button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown"
-    = users_group&.title || t('.groups')
-  .dropdown-menu
-    = link_to t('.all_groups'), admin_students_path, class: 'dropdown-item'
-    - user_groups.each do |users_group|
-      = link_to users_group.title, admin_students_path(users_group_id: users_group.id), \
-        class: 'dropdown-item'
+= render 'admin/shared/user_groups_dropdown'
 br
+
 table.table.table-striped.table-hover
   thead: tr
     th scope="col"
@@ -20,16 +14,16 @@ table.table.table-striped.table-hover
     th scope="col"
 
   tbody
-    - students.each do |student|
+    - users.each do |user|
       tr
-        td = student.full_name
-        td = link_to student.github_url, student.github_url
+        td = user.full_name
+        td = link_to user.github_url, user.github_url
         td
           - accomplishment_percent = 100.0 / finished_topics.count
           .progress
             - finished_topics.each do |topic|
               - progress_title = topic.title
-              - topic_accomplishment = student.accomplishments.detect { |it| it.topic == topic }
+              - topic_accomplishment = user.accomplishments.detect { |it| it.topic == topic }
               - progress_title << " | #{l(topic_accomplishment.updated_at, format: :short)}" if topic_accomplishment
               .progress-bar[
                 role="progressbar"
@@ -39,8 +33,8 @@ table.table.table-striped.table-hover
                 class=(topic_accomplishment ? (topic_accomplishment.done? ? 'bg-success' : 'bg-info') : nil)
               ]
         td
-          = link_to edit_admin_student_path(student), class: 'text-warning' do
+          = link_to edit_admin_user_path(user), class: 'text-warning' do
             = fa_icon('edit')
-          = link_to admin_student_path(student), method: :delete, \
+          = link_to admin_user_path(user), method: :delete, \
             class: 'text-danger', data: { confirm: t('.are_you_sure') } do
             = fa_icon('trash-o')

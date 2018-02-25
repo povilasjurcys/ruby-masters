@@ -1,5 +1,9 @@
 h1= (topic.ancestor_topics.map(&:title) + [topic.title]).join(' » ')
 
+= render 'admin/shared/user_groups_dropdown'
+
+br
+
 ul.list-group
   = render partial: 'admin/topics/topic', collection: topic.subtopics, as: :topic
 

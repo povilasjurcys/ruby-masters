@@ -1,5 +1,9 @@
 h1= t('.title')
 
+= render 'admin/shared/user_groups_dropdown'
+
+br
+
 ul.list-group
   = render partial: 'admin/topics/topic', collection: topics
 

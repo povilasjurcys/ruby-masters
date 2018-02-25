@@ -1,0 +1,8 @@
+.dropdown
+  button.btn.btn-sm.dropdown-toggle type="button" data-toggle="dropdown"
+    = users_group&.title || t('.groups')
+  .dropdown-menu
+    = link_to t('.all_groups'), url_for(users_group_id: nil), class: 'dropdown-item'
+    - user_groups.each do |users_group|
+      = link_to users_group.title, url_for(users_group_id: users_group.id), \
+        class: 'dropdown-item'
