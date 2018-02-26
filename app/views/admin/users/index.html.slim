@@ -24,7 +24,7 @@ table.table.table-striped.table-hover
             - finished_topics.each do |topic|
               - progress_title = topic.title
               - topic_accomplishment = user.accomplishments.detect { |it| it.topic == topic }
-              - progress_title << " | #{l(topic_accomplishment.updated_at, format: :short)}" if topic_accomplishment
+              - progress_title += " | #{l(topic_accomplishment.updated_at, format: :short)}" if topic_accomplishment
               .progress-bar[
                 role="progressbar"
                 style="width: #{accomplishment_percent}%"
