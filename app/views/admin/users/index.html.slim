@@ -8,7 +8,7 @@ table.table.table-striped.table-hover
     th scope="col"
       = t('.full_name')
     th scope="col"
-      = t('.github_url')
+      = t('.groups')
     th scope="col"
       = t('.progress')
     th scope="col"
@@ -16,8 +16,12 @@ table.table.table-striped.table-hover
   tbody
     - users.each do |user|
       tr
-        td = user.full_name
-        td = link_to user.github_url, user.github_url
+        td
+          = user.full_name
+          - if user.github_url
+            '
+            = link_to fa_icon('github'), user.github_url
+        td = user.user_groups.map(&:title).sort.join(", ")
         td
           - accomplishment_percent = 100.0 / finished_topics.count
           .progress

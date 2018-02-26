@@ -27,7 +27,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name)
+      params.require(:user).permit(:first_name, :last_name, :github_url)
     end
   end
 end
