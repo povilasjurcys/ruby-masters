@@ -2,12 +2,13 @@ module Admin
   class UsersController < AdministrationController
     expose(:user, scope: -> { users })
     expose(:finished_topics) do
-      Learning::Topic
-        .where(id: users_accomplishments.pluck(:topic_id))
-        .order(%i[parent_topic_id position])
+      course.leaf_topics & users_accomplishments.map(&:topic)
     end
 
+    expose(:course) { Learning::Topic.main.first }
+
     def index; end
+
     def edit; end
 
     def update
@@ -23,7 +24,7 @@ module Admin
     private
 
     def users_accomplishments
-      Learning::Accomplishment.where(user_id: users)
+      Learning::Accomplishment.includes(:topic).where(user_id: users)
     end
 
     def user_params

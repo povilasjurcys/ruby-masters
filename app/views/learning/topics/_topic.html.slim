@@ -5,7 +5,7 @@ li.list-group-item: .row: .col-12
     .float-right: .btn-group
       - if topic.finished?
         button.btn.btn-sm.dropdown-toggle[
-          class=(topic.skipped? ? 'btn-info' : 'btn-success')
+          class=(topic.skipped? ? 'btn-warning' : 'btn-success')
           type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         ]
           = t(".#{topic.status}")

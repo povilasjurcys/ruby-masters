@@ -17,6 +17,10 @@ module Learning
       ancestors
     end
 
+    def leaf_topics
+      subtopics.map { |it| it.subtopics.any? ? it.leaf_topics : it }.flatten
+    end
+
     def finished_by?(user)
       if subtopics.any?
         subtopics.all? { |topic| topic.finished_by?(user) }
