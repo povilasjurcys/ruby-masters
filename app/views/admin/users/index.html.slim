@@ -4,21 +4,29 @@ h1= t('.title')
 br
 
 table.table.table-striped.table-hover
-  thead: tr
-    th scope="col"
+  thead: tr.row
+    th.col-4 scope="col"
       = t('.full_name')
-    th scope="col"
-      = t('.github_url')
-    th scope="col"
+    th.col-2 scope="col"
+      = t('.group')
+    th.col-5 scope="col"
       = t('.progress')
-    th scope="col"
+    th.col-1 scope="col"
 
   tbody
     - users.each do |user|
-      tr
-        td = user.full_name
-        td = link_to user.github_url, user.github_url
-        td
+      tr.row
+        td.col-4
+          = user.full_name
+          - if user.github_url
+            '
+            = link_to fa_icon('github'), user.github_url
+        td.col-2
+          - user.user_groups.each do |users_group|
+            = link_to url_for(users_group_id: users_group.id) do
+              span.badge.badge-success title=users_group.title data-toggle="tooltip"
+                = "##{users_group.id}"
+        td.col-5
           - accomplishment_percent = 100.0 / finished_topics.count
           .progress
             - finished_topics.each do |topic|
@@ -32,7 +40,7 @@ table.table.table-striped.table-hover
                 data-toggle="tooltip"
                 class=(topic_accomplishment ? (topic_accomplishment.done? ? 'bg-success' : 'bg-warning') : nil)
               ]
-        td
+        td.col-1
           = link_to edit_admin_user_path(user), class: 'text-warning' do
             = fa_icon('edit')
           = link_to admin_user_path(user), method: :delete, \
